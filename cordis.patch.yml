@@ -1,0 +1,3 @@
+- insert:
+    - id: wisp-science-lab
+      name: '/home/xzg/project/wisp-plugins/dsh-wisp-science-lab/src/index.ts'

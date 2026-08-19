@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "verbatimModuleSyntax": true,
+    "rewriteRelativeImportExtensions": true,
+    "types": ["node"],
+    "paths": {
+      "@deepseek-ai/cordis": ["../../dsh-reader/deepseek-harness/vendor/cordis/src/index.ts"],
+      "@deepseek-ai/dsh-tools": ["../../dsh-reader/deepseek-harness/packages/core/tools/src/index.ts"],
+      "@deepseek-ai/dsh-system-prompt": ["../../dsh-reader/deepseek-harness/packages/core/system-prompt/src/index.ts"],
+      "@deepseek-ai/schemastery": ["../../dsh-reader/deepseek-harness/vendor/schemastery/src/index.ts"]
+    }
+  },
+  "include": ["src", "tests", "scripts"]
+}

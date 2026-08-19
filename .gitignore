@@ -1,0 +1,10 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.DS_Store
+.env
+*.sqlite-wal
+*.sqlite-shm
+/tmp/
+/tmp-wisp/
+wisp.sqlite

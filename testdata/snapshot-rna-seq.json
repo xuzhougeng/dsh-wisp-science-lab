@@ -1,0 +1,179 @@
+{
+  "project_id": "804f67d2-3305-4b75-805f-81bf7fbb0b4d",
+  "name": "转录组分析",
+  "workspace_dir": "D:\\Wisp-Science\\rna-seq",
+  "frames": [
+    {
+      "id": "56708588-0715-482b-83ce-aae1fad795b1",
+      "title": null,
+      "status": "running",
+      "updated_at": 1786929189
+    }
+  ],
+  "runs": [
+    {
+      "id": "1faf0b3d-06a0-406b-8f1b-9471d91c78d4",
+      "title": "Download srr2584863_bundle.tar.gz from omics-server",
+      "kind": "file_transfer",
+      "status": "succeeded",
+      "exit_code": 0,
+      "ended_at": 1786930304
+    },
+    {
+      "id": "e5b47725-530a-4909-92c7-b8f2471a0c3f",
+      "title": "Verify outputs, capture versions, bundle small artifacts",
+      "kind": "ssh_direct",
+      "status": "succeeded",
+      "exit_code": 0,
+      "ended_at": 1786930287
+    },
+    {
+      "id": "88a8fc61-c7f2-4aca-a730-7be011458eaa",
+      "title": "Render per-cycle QC check figure (R, base graphics)",
+      "kind": "ssh_direct",
+      "status": "succeeded",
+      "exit_code": 0,
+      "ended_at": 1786930243
+    },
+    {
+      "id": "7b53ce12-64ea-4b98-9ebd-ffbf7a1b7518",
+      "title": "Run streaming FASTQ QC on SRR2584863",
+      "kind": "ssh_direct",
+      "status": "succeeded",
+      "exit_code": 0,
+      "ended_at": 1786930199
+    },
+    {
+      "id": "16bf23ac-d726-434e-bc77-6e88e4ddcc67",
+      "title": "Stage scripts, download SRR2584863 from ENA, verify MD5",
+      "kind": "ssh_direct",
+      "status": "succeeded",
+      "exit_code": 0,
+      "ended_at": 1786929937
+    },
+    {
+      "id": "a65423a2-9601-471c-a22e-e324e05f9cfb",
+      "title": "Check numpy, create work dirs on server",
+      "kind": "ssh_direct",
+      "status": "succeeded",
+      "exit_code": 0,
+      "ended_at": 1786929769
+    },
+    {
+      "id": "f88ba19c-5de3-4019-9e7d-9c94a9d5895d",
+      "title": "Probe omics-server env + ENA connectivity",
+      "kind": "ssh_direct",
+      "status": "succeeded",
+      "exit_code": 0,
+      "ended_at": 1786929642
+    }
+  ],
+  "run_status": [
+    {
+      "status": "succeeded",
+      "n": 7
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "resource-93da59e554158a4f4e79e2fb00df34cc",
+      "filename": "qc-summary.tsv",
+      "content_type": "text/tab-separated-values",
+      "created_at": 1786930468
+    },
+    {
+      "id": "resource-2be7d9ba9829f10c8da022f79267c76e",
+      "filename": "per-cycle-quality.tsv",
+      "content_type": "text/tab-separated-values",
+      "created_at": 1786930468
+    },
+    {
+      "id": "resource-1d79fdd6fd93aef8298e459f29c30296",
+      "filename": "qc-report.html",
+      "content_type": "text/html",
+      "created_at": 1786930468
+    },
+    {
+      "id": "resource-a9ec1e7933e734eddd37bd7770d265ea",
+      "filename": "srr2584863-per-cycle-quality.png",
+      "content_type": "image/png",
+      "created_at": 1786930468
+    },
+    {
+      "id": "resource-73213d2a74ca1a852e02b5bfa0af47fc",
+      "filename": "srr2584863-qc-methods.md",
+      "content_type": "text/markdown",
+      "created_at": 1786930468
+    },
+    {
+      "id": "artifact-6be33e08cd8b77c94543f23258726a08",
+      "filename": "02_fastq_qc.py",
+      "content_type": "text/x-python",
+      "created_at": 1786929891
+    },
+    {
+      "id": "artifact-ca340e54dbec54df885ba601ef7e5f0d",
+      "filename": "01_download_ena_fastq.sh",
+      "content_type": "text/x-shellscript",
+      "created_at": 1786929890
+    }
+  ],
+  "research_nodes": [
+    {
+      "kind": "artifact",
+      "title": "01_download_ena_fastq.sh"
+    },
+    {
+      "kind": "artifact",
+      "title": "02_fastq_qc.py"
+    },
+    {
+      "kind": "artifact",
+      "title": "qc-summary.tsv"
+    },
+    {
+      "kind": "artifact",
+      "title": "per-cycle-quality.tsv"
+    },
+    {
+      "kind": "artifact",
+      "title": "qc-report.html"
+    },
+    {
+      "kind": "artifact",
+      "title": "srr2584863-per-cycle-quality.png"
+    },
+    {
+      "kind": "artifact",
+      "title": "srr2584863-qc-methods.md"
+    },
+    {
+      "kind": "run",
+      "title": "Probe omics-server env + ENA connectivity"
+    },
+    {
+      "kind": "run",
+      "title": "Check numpy, create work dirs on server"
+    },
+    {
+      "kind": "run",
+      "title": "Stage scripts, download SRR2584863 from ENA, verify MD5"
+    },
+    {
+      "kind": "run",
+      "title": "Run streaming FASTQ QC on SRR2584863"
+    },
+    {
+      "kind": "run",
+      "title": "Render per-cycle QC check figure (R, base graphics)"
+    },
+    {
+      "kind": "run",
+      "title": "Verify outputs, capture versions, bundle small artifacts"
+    },
+    {
+      "kind": "run",
+      "title": "Download srr2584863_bundle.tar.gz from omics-server"
+    }
+  ]
+}

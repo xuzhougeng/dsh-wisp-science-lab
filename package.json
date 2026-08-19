@@ -1,0 +1,32 @@
+{
+  "name": "dsh-wisp-science-lab",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "dsh plugin: laboratory PI over a host Wisp Science library (read-only v0)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xuzhougeng/dsh-wisp-science-lab.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xuzhougeng/dsh-wisp-science-lab/issues"
+  },
+  "homepage": "https://github.com/xuzhougeng/dsh-wisp-science-lab#readme",
+  "engines": {
+    "node": "^22.19.0 || >=24.0.0"
+  },
+  "scripts": {
+    "test": "node --experimental-strip-types --test --test-concurrency=1 tests/paths.test.ts tests/store.test.ts",
+    "print-snapshot": "node --experimental-strip-types scripts/print-snapshot.ts",
+    "build-mini": "node --experimental-strip-types scripts/build-mini-sqlite.ts"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-system-prompt": ">=0.1.0-rc.7 <0.2.0",
+    "@deepseek-ai/dsh-tools": ">=0.1.0-rc.7 <0.2.0",
+    "@deepseek-ai/schemastery": "^3.18.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.16.5",
+    "typescript": "^5.8.3"
+  }
+}
