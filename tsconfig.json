@@ -16,5 +16,6 @@
       "@deepseek-ai/schemastery": ["../../dsh-reader/deepseek-harness/vendor/schemastery/src/index.ts"]
     }
   },
-  "include": ["src", "tests", "scripts"]
+  "include": ["src", "tests", "scripts"],
+  "exclude": ["lib"]
 }

@@ -1,6 +1,5 @@
-import type { Context } from '@deepseek-ai/cordis'
-import { defineTool } from '@deepseek-ai/dsh-tools'
 import type { Config } from './config.ts'
+import type { LabContext } from './ctx.ts'
 import { resolveAppDataDir } from './paths.ts'
 import { listProjects, renderSnapshotSummary, snapshotProject, withWispCopy } from './store.ts'
 
@@ -14,8 +13,8 @@ function limitsOf(config: Config) {
   }
 }
 
-export function registerTools(ctx: Context, config: Config): void {
-  ctx.tools.register(defineTool({
+export function registerTools(ctx: LabContext, config: Config): void {
+  ctx.tools.register({
     name: 'wisp_list_projects',
     description: '列出宿主机 Wisp Science 的课题（只读）。需要谈某个项目的进展时先用这个，再用 wisp_project_snapshot。',
     parameters: {
@@ -25,7 +24,7 @@ export function registerTools(ctx: Context, config: Config): void {
       },
     },
     output: {
-      schema: { type: 'json' },
+      schema: { type: 'object', additionalProperties: true },
       render(_args, value) {
         const listed = value as ReturnType<typeof listProjects>
         const lines = listed.projects.map((project) =>
@@ -41,12 +40,12 @@ export function registerTools(ctx: Context, config: Config): void {
       const appDataDir = resolveAppDataDir(config.appDataDir)
       return withWispCopy(appDataDir, (db) => listProjects(db, {
         appDataDir,
-        query: args.query ?? '',
+        query: typeof args.query === 'string' ? args.query : '',
       }))
     },
-  }))
+  })
 
-  ctx.tools.register(defineTool({
+  ctx.tools.register({
     name: 'wisp_project_snapshot',
     description: '读取一个 Wisp 课题的有界进展快照（只读）：最近会话/Run/产物、研究图标题、WISP.md、memory 文件名。用项目 id、精确名称或唯一子串指定。',
     parameters: {
@@ -57,19 +56,22 @@ export function registerTools(ctx: Context, config: Config): void {
       },
     },
     output: {
-      schema: { type: 'json' },
+      schema: { type: 'object', additionalProperties: true },
       render(_args, value) {
         return [{ type: 'text', text: renderSnapshotSummary(value as ReturnType<typeof snapshotProject>) }]
       },
     },
     presentCall(args) {
-      return { card: 'generic', title: `快照 ${args.project}`, kind: 'read' }
+      return { card: 'generic', title: `快照 ${String(args.project ?? '')}`, kind: 'read' }
     },
     async execute(args) {
+      if (typeof args.project !== 'string' || args.project.trim() === '') {
+        throw new Error('project is required')
+      }
       const appDataDir = resolveAppDataDir(config.appDataDir)
-      return withWispCopy(appDataDir, (db) => snapshotProject(db, args.project, {
+      return withWispCopy(appDataDir, (db) => snapshotProject(db, args.project as string, {
         limits: limitsOf(config),
       }))
     },
-  }))
+  })
 }

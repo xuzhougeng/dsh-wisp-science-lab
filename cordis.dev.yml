@@ -1,0 +1,6 @@
+# Local source overlay for `pnpm dsh web --patch`. Replace the path with
+# this checkout on your machine. Installed users should use `dsh plugin add`
+# and cordis.patch.yml (package name) instead.
+- insert:
+    - id: wisp-science-lab
+      name: '/home/xzg/project/wisp-plugins/dsh-wisp-science-lab/src/index.ts'

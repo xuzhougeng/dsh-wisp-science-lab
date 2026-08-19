@@ -1,5 +1,3 @@
-import Schema from '@deepseek-ai/schemastery'
-
 export interface Config {
   appDataDir: string
   maxSessions: number
@@ -9,11 +7,38 @@ export interface Config {
   wispMdMaxBytes: number
 }
 
-export const Config: Schema<Config> = Schema.object({
-  appDataDir: Schema.string().default('').description('Wisp app data directory that contains wisp.sqlite. Empty = auto-detect.'),
-  maxSessions: Schema.number().default(8).description('Max recent sessions in a snapshot.'),
-  maxRuns: Schema.number().default(12).description('Max recent runs in a snapshot.'),
-  maxArtifacts: Schema.number().default(12).description('Max recent artifacts in a snapshot.'),
-  maxMemoryFiles: Schema.number().default(20).description('Max .wisp/memory filenames in a snapshot.'),
-  wispMdMaxBytes: Schema.number().default(8192).description('Truncate .wisp/WISP.md to this many bytes.'),
-})
+export const defaults: Config = {
+  appDataDir: '',
+  maxSessions: 8,
+  maxRuns: 12,
+  maxArtifacts: 12,
+  maxMemoryFiles: 20,
+  wispMdMaxBytes: 8192,
+}
+
+function asNumber(value: unknown, fallback: number): number {
+  return typeof value === 'number' && Number.isFinite(value) ? value : fallback
+}
+
+export function resolveConfig(raw: unknown): Config {
+  const input = raw && typeof raw === 'object' ? raw as Record<string, unknown> : {}
+  return {
+    appDataDir: typeof input.appDataDir === 'string' ? input.appDataDir : defaults.appDataDir,
+    maxSessions: asNumber(input.maxSessions, defaults.maxSessions),
+    maxRuns: asNumber(input.maxRuns, defaults.maxRuns),
+    maxArtifacts: asNumber(input.maxArtifacts, defaults.maxArtifacts),
+    maxMemoryFiles: asNumber(input.maxMemoryFiles, defaults.maxMemoryFiles),
+    wispMdMaxBytes: asNumber(input.wispMdMaxBytes, defaults.wispMdMaxBytes),
+  }
+}
+
+/** Standard Schema so Cordis can validate `config:` in the patch / profile. */
+export const Config = {
+  '~standard': {
+    version: 1 as const,
+    vendor: 'dsh-wisp-science-lab',
+    validate(value: unknown) {
+      return { value: resolveConfig(value) }
+    },
+  },
+}
