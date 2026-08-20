@@ -2,14 +2,19 @@
   "name": "dsh-wisp-science-lab",
   "version": "0.1.1",
   "type": "module",
-  "description": "Laboratory PI for DeepSeek Harness: read-only progress snapshots of local Wisp Science projects / 实验室 PI：只读查看本机 Wisp Science 课题进展",
+  "description": "DSH plugin: laboratory PI for local Wisp Science projects. Read-only snapshots, evidence-backed advice, no fake experiments. / 实验室 PI：只读查看本机 Wisp Science 课题进展，按快照给意见，不编造实验。",
   "keywords": [
     "dsh",
     "dsh-plugin",
+    "dsh-plugins",
     "deepseek-harness",
     "cordis",
     "wisp",
-    "wisp-science"
+    "wisp-science",
+    "science",
+    "bioinformatics",
+    "laboratory",
+    "local-first"
   ],
   "repository": {
     "type": "git",
