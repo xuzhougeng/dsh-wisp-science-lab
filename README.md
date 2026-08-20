@@ -13,7 +13,14 @@ dsh plugin --profile web add github:xuzhougeng/dsh-wisp-science-lab
 dsh web
 ```
 
-仓库已带编译后的 `lib/`，一般不必跑 `prepare`，也不用改 `allowBuilds`。装完重启 `dsh web`。终端出现 `[wisp-science-lab] plugin loaded` 即成功。
+这一条会同时做两件事：
+
+1. 把包装进当前 profile 的 `node_modules`
+2. 因为 `package.json` 声明了 `dsh.bundle`，把 `cordis.patch.yml` 注册进该 profile 的插件层（插入 `wisp-science-lab` 这一行）
+
+不要再手动 `--patch` 同一份配置，否则会双加载。仓库已带编译后的 `lib/`，一般不必跑 `prepare`，也不用改 `allowBuilds`。装完重启 `dsh web`。终端出现 `[wisp-science-lab] plugin loaded` 即成功。
+
+本仓库带 GitHub topic **`dsh-plugin`**，可被 `dsh-find-plugin` 和市场按 topic 检索到。
 
 从本地 clone 安装：
 
@@ -81,7 +88,7 @@ export WISP_APP_DATA_DIR=/mnt/c/Users/<你的Windows用户名>/AppData/Roaming/s
 
 ## 从源码开发
 
-改插件本身、用 harness 源码启动时：
+改插件本身、用 harness 源码启动时（开发 overlay，不要和市场安装叠在一起）：
 
 ```sh
 cd /path/to/deepseek-harness

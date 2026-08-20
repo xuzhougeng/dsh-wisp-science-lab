@@ -2,7 +2,15 @@
   "name": "dsh-wisp-science-lab",
   "version": "0.1.0",
   "type": "module",
-  "description": "dsh plugin: laboratory PI over a host Wisp Science library (read-only v0)",
+  "description": "Laboratory PI for DeepSeek Harness: read-only progress snapshots of local Wisp Science projects / 实验室 PI：只读查看本机 Wisp Science 课题进展",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "cordis",
+    "wisp",
+    "wisp-science"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/xuzhougeng/dsh-wisp-science-lab.git"
@@ -13,7 +21,9 @@
   "homepage": "https://github.com/xuzhougeng/dsh-wisp-science-lab#readme",
   "main": "./lib/index.js",
   "exports": {
-    ".": "./lib/index.js"
+    ".": "./lib/index.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
   },
   "files": [
     "lib",
@@ -21,6 +31,8 @@
     "README.md"
   ],
   "dsh": {
+    "plugin": true,
+    "kind": "server",
     "bundle": {
       "patch": "./cordis.patch.yml"
     }
