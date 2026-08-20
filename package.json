@@ -1,6 +1,6 @@
 {
   "name": "dsh-wisp-science-lab",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "description": "Laboratory PI for DeepSeek Harness: read-only progress snapshots of local Wisp Science projects / 实验室 PI：只读查看本机 Wisp Science 课题进展",
   "keywords": [

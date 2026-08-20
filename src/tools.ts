@@ -18,9 +18,12 @@ export function registerTools(ctx: LabContext, config: Config): void {
     name: 'wisp_list_projects',
     description: '列出宿主机 Wisp Science 的课题（只读）。需要谈某个项目的进展时先用这个，再用 wisp_project_snapshot。',
     parameters: {
-      query: {
-        type: 'string',
-        description: '可选。按项目名、id 或描述的子串过滤。',
+      type: 'object',
+      properties: {
+        query: {
+          type: 'string',
+          description: '可选。按项目名、id 或描述的子串过滤。',
+        },
       },
     },
     output: {
@@ -49,11 +52,14 @@ export function registerTools(ctx: LabContext, config: Config): void {
     name: 'wisp_project_snapshot',
     description: '读取一个 Wisp 课题的有界进展快照（只读）：最近会话/Run/产物、研究图标题、WISP.md、memory 文件名。用项目 id、精确名称或唯一子串指定。',
     parameters: {
-      project: {
-        type: 'string',
-        required: true,
-        description: '项目 id、精确名称，或能唯一命中的名称/id 子串。',
+      type: 'object',
+      properties: {
+        project: {
+          type: 'string',
+          description: '项目 id、精确名称，或能唯一命中的名称/id 子串。',
+        },
       },
+      required: ['project'],
     },
     output: {
       schema: { type: 'object', additionalProperties: true },
