@@ -4,23 +4,60 @@ DeepSeek Harness（dsh）插件：让 agent 当实验室 PI，只读查看本机
 
 **v0 只读。** 不写 `wisp.sqlite`，不在 dsh 里跑 Python / R / FASTQ，也不能派 Wisp 去干活。
 
-## 别人怎么装
+## 如何安装
 
-需要已经能跑 `dsh web`，并且本机有 Wisp Science（存在 `wisp.sqlite`）。
+本插件跑在 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)（`dsh`）里，并读取本机 [Wisp Science](https://github.com/xuzhougeng/wisp-science) 的 `wisp.sqlite`。没有 dsh 就装不上。
+
+### 1. 安装 dsh
+
+需要 Node.js `^22.19.0` 或 `>=24`。
+
+一次性启动 Web UI（推荐，官方一键方式）：
 
 ```sh
-dsh plugin --profile web add github:xuzhougeng/dsh-wisp-science-lab
+npx @deepseek-ai/dsh web
+```
+
+浏览器打开 `http://127.0.0.1:3080`。首次会初始化 `web` profile，在设置里填入模型 API key。
+
+若希望本机有 `dsh` 命令（方便后面 `dsh plugin`）：
+
+```sh
+npm install -g @deepseek-ai/dsh
 dsh web
 ```
 
-这一条会同时做两件事：
+从源码跑见 [deepseek-harness README](https://github.com/deepseek-ai/deepseek-harness#run)。
 
-1. 把包装进当前 profile 的 `node_modules`
-2. 因为 `package.json` 声明了 `dsh.bundle`，把 `cordis.patch.yml` 注册进该 profile 的插件层（插入 `wisp-science-lab` 这一行）
+### 2. 安装本插件
 
-不要再手动 `--patch` 同一份配置，否则会双加载。仓库已带编译后的 `lib/`，一般不必跑 `prepare`，也不用改 `allowBuilds`。装完重启 `dsh web`。终端出现 `[wisp-science-lab] plugin loaded` 即成功。
+另开一个终端（或先停掉 web 再装）：
 
-本仓库带 GitHub topic **`dsh-plugin`**，可被 `dsh-find-plugin` 和市场按 topic 检索到。
+```sh
+dsh plugin --profile web add github:xuzhougeng/dsh-wisp-science-lab
+```
+
+没有全局 `dsh` 时：
+
+```sh
+npx @deepseek-ai/dsh plugin --profile web add github:xuzhougeng/dsh-wisp-science-lab
+```
+
+这一条会同时：
+
+1. 把包装进 `web` profile 的 `node_modules`
+2. 因为 `package.json` 声明了 `dsh.bundle`，把 `cordis.patch.yml` 注册进该 profile 的插件层
+
+不要再手动 `--patch` 同一份配置，否则会双加载。仓库已带编译后的 `lib/`，一般不必跑 `prepare`，也不用改 `allowBuilds`。
+
+然后重新启动：
+
+```sh
+dsh web
+# 或：npx @deepseek-ai/dsh web
+```
+
+终端出现 `[wisp-science-lab] plugin loaded` 即成功。本仓库带 GitHub topic **`dsh-plugin`**，可被检索到。
 
 从本地 clone 安装：
 
